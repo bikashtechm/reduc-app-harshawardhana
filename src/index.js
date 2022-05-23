@@ -10,14 +10,37 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 // State
 let defaultState = 0;
 
+// Action Type
+
+const DEPOSIT = "DEPOSIT";
+const WITHDRAW = "WITHDRAW";
+
+// Action Creators
+const depositAction = (amount) => {
+  return {
+    type: DEPOSIT,
+    payload: {
+      amount: amount,
+    },
+  };
+};
+
+const withdrawAction = (amount) => {
+  return {
+    type: WITHDRAW,
+    payload: {
+      amount: amount,
+    },
+  };
+};
+
 // Reducers
 const balanceReducer = (state = defaultState, action) => {
-  console.log("Reducer Called...");
   switch (action.type) {
-    case "DEPOSIT":
+    case DEPOSIT:
       return state + action.payload.amount;
 
-    case "WITHDRAW":
+    case WITHDRAW:
       return state - action.payload.amount;
 
     default:
@@ -35,24 +58,10 @@ store.subscribe(() => {
 });
 
 // Dispatch
-store.dispatch({
-  type: "DEPOSIT",
-  payload: {
-    amount: 100,
-  },
-});
-store.dispatch({
-  type: "DEPOSIT",
-  payload: {
-    amount: 200,
-  },
-});
-store.dispatch({
-  type: "WITHDRAW",
-  payload: {
-    amount: 50,
-  },
-});
+store.dispatch(depositAction(100));
+store.dispatch(depositAction(500));
+store.dispatch(depositAction(300));
+store.dispatch(withdrawAction(100));
 
 root.render(
   <React.StrictMode>
