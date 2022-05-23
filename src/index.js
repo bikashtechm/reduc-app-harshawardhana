@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { configureStore } from "@reduxjs/toolkit";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -11,6 +12,7 @@ let defaultState = 0;
 
 // Reducers
 const balanceReducer = (state = defaultState, action) => {
+  console.log("Reducer Called...");
   switch (action.type) {
     case "DEPOSIT":
       return state + 100;
@@ -22,6 +24,11 @@ const balanceReducer = (state = defaultState, action) => {
       return state;
   }
 };
+
+//Store
+const store = configureStore({
+  reducer: balanceReducer,
+});
 
 root.render(
   <React.StrictMode>
