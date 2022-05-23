@@ -15,10 +15,10 @@ const balanceReducer = (state = defaultState, action) => {
   console.log("Reducer Called...");
   switch (action.type) {
     case "DEPOSIT":
-      return state + 100;
+      return state + action.payload.amount;
 
     case "WITHDRAW":
-      return state - 100;
+      return state - action.payload.amount;
 
     default:
       return state;
@@ -37,6 +37,21 @@ store.subscribe(() => {
 // Dispatch
 store.dispatch({
   type: "DEPOSIT",
+  payload: {
+    amount: 100,
+  },
+});
+store.dispatch({
+  type: "DEPOSIT",
+  payload: {
+    amount: 200,
+  },
+});
+store.dispatch({
+  type: "WITHDRAW",
+  payload: {
+    amount: 50,
+  },
 });
 
 root.render(
