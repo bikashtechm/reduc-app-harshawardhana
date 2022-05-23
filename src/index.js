@@ -25,9 +25,18 @@ const balanceReducer = (state = defaultState, action) => {
   }
 };
 
-//Store
+// Store
 const store = configureStore({
   reducer: balanceReducer,
+});
+
+store.subscribe(() => {
+  console.log(store.getState());
+});
+
+// Dispatch
+store.dispatch({
+  type: "DEPOSIT",
 });
 
 root.render(
